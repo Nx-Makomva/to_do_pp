@@ -23,4 +23,8 @@ def test_returns_false_todo_no_hash():
 def test_returns_false_empty_string():
     with pytest.raises(Exception) as e:
         includes_todo('')
-    assert str(e.value) == 'Input is empty, please write a task'  
+    assert str(e.value) == 'Input is empty, please write a task'
+
+def test_returns_false_when_input_not_string():
+    assert includes_todo(2163) == False
+    assert includes_todo(None) == False
