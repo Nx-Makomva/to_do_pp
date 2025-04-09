@@ -50,50 +50,42 @@ def extract_uppercase(mixed_words):
 
 _Make a list of examples of what the function will take and return._
 
+
+
+
+
 ```python
-# EXAMPLE
 
 """
-Given a lower and an uppercase word
-It returns a list with the uppercase word
+Given a string that doesn't contain #TODO:
 """
-extract_uppercase("hello WORLD") => ["WORLD"]
+includes_todo('drink tea') => False
+
 
 """
-Given two uppercase words
-It returns a list with both words
+Given a string that does contain #TODO:
 """
-extract_uppercase("HELLO WORLD") => ["HELLO", "WORLD"]
+includes_todo('#TODO drink tea') => True
+
 
 """
-Given two lowercase words
-It returns an empty list
+Given a string containing #todo
 """
-extract_uppercase("hello world") => []
+includes_todo('#todo drink tea') => False
+
 
 """
-Given a lower and a mixed case word
-It returns an empty list
+Given a int or float rather than a string
 """
-extract_uppercase("hello WoRLD") => []
+includes_todo(23456789) => False | 'Input must be a string'
+
 
 """
-Given a lowercase word and an uppercase word with an exclamation mark
-It returns a list with the uppercase word, no exclamation mark
+Given a string which contains TODO (no #)
 """
-extract_uppercase("hello WORLD!") => ["WORLD"]
+includes_todo('TODO drink water') => False
 
-"""
-Given an empty string
-It returns an empty list
-"""
-extract_uppercase("") => []
 
-"""
-Given a None value
-It throws an error
-"""
-extract_uppercase(None) throws an error
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
@@ -107,15 +99,58 @@ Here's an example for you to start with:
 ```python
 # EXAMPLE
 
-from lib.extract_uppercase import *
+from lib.includes_todo import *
 
 """
-Given a lower and an uppercase word
-It returns a list with the uppercase word
+Given a string that doesn't contain #TODO:
 """
-def test_extract_uppercase_with_upper_then_lower():
-    result = extract_uppercase("hello WORLD")
-    assert result == ["WORLD"]
+def test_returns_false_no_todo():
+    assert includes_todo('Drink water') == False
+
+
+"""
+Given a string that does contain #TODO:
+"""
+def test_returns_true_contains_todo():
+    assert includes_todo('#TODO drink water') == True
+
+
+"""
+Given a string that does contain #TODO end of input:
+"""
+def test_returns_true_contains_todo():
+    assert includes_todo('drink water #TODO') == True
+
+
+"""
+Given a string containing #todo
+"""
+def test_returns_false_lowercase_todo():
+    assert includes_todo('#todo drink water') == False
+
+
+# """
+# Given a int or float rather than a string
+# """
+# def test_throws_error_if_input_not string():
+#     (948484)
+
+"""
+Given an empty string
+"""
+def test_returns_false_empty_string():
+    with pytest.raises(Exception) as e:
+        includes_todo('')
+    assert str(e.value) == 'Input is empty, please write a task'
+
+
+"""
+Given a sting that contains todo (no #)
+"""
+def test_returns_false_todo_no_hash():
+    assert includes_todo('TODO drink water') => False
+
+
 ```
 
 Ensure all test function names are unique, otherwise pytest will ignore them!
